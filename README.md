@@ -1,7 +1,7 @@
 SpreeOnePageCheckout
 ====================
 
-Introduction goes here.
+Implement one page checkout with Spree. The goal here is to build a solution which is clean and elegant, especially taking into account the ability of the app to be easily updated when new version of Spree comes out.
 
 Installation
 ------------
@@ -36,4 +36,4 @@ Simply add this require statement to your spec_helper:
 require 'spree_one_page_checkout/factories'
 ```
 
-Copyright (c) 2014 [name of extension creator], released under the New BSD License
+Copyright (c) 2014 [Acid Labs](http://acid.cl), all rigths reserved.
