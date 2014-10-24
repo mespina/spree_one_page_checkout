@@ -1,12 +1,15 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
 
-<div id="registration" data-hook>
+<div id="registration" class="row" data-hook>
   <div id="account" class="columns alpha six">
-    <%= render template: 'spree/user_sessions/new' %>
+    <fieldset id="login" data-hook>
+      <legend align="center"><%= Spree.t(:login_as_existing) %></legend>
+      <%= render template: 'spree/user_sessions/new' %>
+    </fieldset>
   </div>
 
   <% if Spree::Config[:allow_guest_checkout] %>
-    <div id="guest_checkout" data-hook class="columns <%= Spree::Config[:allow_guest_checkout] ? 'six' : 'twelve' %>">
+    <div id="guest_checkout" data-hook class="columns omega <%= Spree::Config[:allow_guest_checkout] ? 'six' : 'twelve' %>">
       <fieldset id="guest_login" data-hook>
         <legend align="center"><%= Spree.t(:guest_user_account) %></legend>
 

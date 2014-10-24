@@ -17,11 +17,9 @@
     </div>
 
     <div class="columns omega four">
-      <% unless Spree::Auth::Config[:registration_step] and !current_spree_user %>
-        <div id="checkout-summary" data-hook="checkout_summary_box">
-          <%= render :partial => 'spree/checkout/summary', :locals => { :order => @order } %>
-        </div>
-      <% end %>
+      <div id="checkout-summary" data-hook="checkout_summary_box">
+        <%= render :partial => 'spree/checkout/summary', :locals => { :order => @order } %>
+      </div>
     </div>
 
   </div>
