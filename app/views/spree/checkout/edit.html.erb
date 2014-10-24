@@ -1,7 +1,7 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @order } %>
 
 <div id="checkout" data-hook>
-  <% if Spree::Auth::Config[:registration_step] %>
+  <% if Spree::Auth::Config[:registration_step] and !current_spree_user %>
     <div class="row checkout_content <%= 'disabled-step' unless in_registration_step? %>" data-step="registration" data-hook="checkout_content" id="checkout_registration">
       <%= render "spree/checkout/registration" %>
     </div>
