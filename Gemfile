@@ -5,3 +5,8 @@ gem 'spree', github: 'spree/spree', branch: '2-3-stable'
 gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: '2-3-stable'
 
 gemspec
+
+group :development do
+  gem 'better_errors'
+  gem 'binding_of_caller'
+end

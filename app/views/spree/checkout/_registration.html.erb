@@ -1,0 +1,33 @@
+<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
+
+<div id="registration" data-hook>
+  <div class="row">
+    <div id="account" class="columns alpha six">
+      <%= render template: 'spree/user_sessions/new' %>
+    </div>
+
+    <% if Spree::Config[:allow_guest_checkout] %>
+      <div id="guest_checkout" data-hook class="columns <%= Spree::Config[:allow_guest_checkout] ? 'six' : 'twelve' %>">
+        <fieldset id="guest_login" data-hook>
+          <legend align="center"><%= Spree.t(:guest_user_account) %></legend>
+
+          <% if flash[:registration_error] %>
+            <div class='flash error'><%= flash[:registration_error] %></div>
+          <% end %>
+
+          <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f| %>
+            <p>
+              <%= f.label :email, Spree.t(:email) %><br />
+              <%= f.email_field :email, :class => 'title' %>
+            </p>
+            <p><%= f.submit Spree.t(:save_and_continue), :class => 'button primary' %></p>
+          <% end %>
+        </fieldset>
+      </div>
+    <% end %>
+
+    <div id="checkout-summary" data-hook="checkout_summary_box" class="columns omega four">
+      <%= render :partial => 'spree/checkout/summary', :locals => { :order => @order } %>
+    </div>
+  </div>
+</div>

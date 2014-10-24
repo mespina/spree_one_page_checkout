@@ -1,0 +1,18 @@
+<div class="columns alpha twelve" data-hook="checkout_form_wrapper">
+  <%= form_for order, :url => update_checkout_path(state), :html => { :id => "checkout_form_#{state}" } do |form| %>
+    <% unless Spree::Auth::Config[:registration_step] or order.email? %>
+      <p class="field" style='clear: both'>
+        <%= form.label :email %><br />
+        <%= form.text_field :email %>
+      </p>
+    <% end %>
+
+    <%= render "spree/checkout/#{state}", :form => form %>
+  <% end %>
+</div>
+
+<% unless Spree::Auth::Config[:registration_step] %>
+  <div id="checkout-summary" data-hook="checkout_summary_box" class="columns omega four">
+    <%= render :partial => 'spree/checkout/summary', :locals => { :order => @order } %>
+  </div>
+<% end %>

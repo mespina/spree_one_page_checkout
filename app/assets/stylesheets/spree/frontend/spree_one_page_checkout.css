@@ -1,4 +1,24 @@
-/*
-Placeholder manifest file.
-the installer will append this file to the app vendored assets here: 'vendor/assets/stylesheets/spree/frontend/all.css'
-*/
+.disabled-step {
+  opacity: .5;
+}
+
+#login legend,
+#guest_login legend {
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 14px;
+  color: #00adee;
+  padding: 5px;
+  margin-left: 15px;
+}
+
+
+#login input[type="email"],
+#login input[type="password"],
+#guest_login input[type="email"]{
+  width: 100%;
+}
+
+#registration #checkout-summary{
+  margin-top: 14px;
+}
