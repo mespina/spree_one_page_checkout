@@ -3,6 +3,19 @@ SpreeOnePageCheckout
 
 Implement one page checkout with Spree. The goal here is to build a solution which is clean and elegant, especially taking into account the ability of the app to be easily updated when new version of Spree comes out.
 
+SpreeOnePageCheckout groups all spree checkout steps in a single view with all the information, each step executes synchronous requests to the server, thus the navigation flow is maintained.
+
+
+The structure of `Spree` views remains in the same manner, with a pair of execciones:
+
+
+* To display all the steps in one page, we overload `spree/checkout/edit.html.erb` our application. For these we are basically walking on each step and each responsible for displaying all the new part is correctly `_form_wrapper`.
+
+* We have overwritten the part that contains the login form to add a `hidden` parameters that allow us logeandonos disernir if we are in the checkout or not.
+
+* View from the Register on the checkout is modified so that it appears as an extra step in the buying process.
+
+
 Installation
 ------------
 
