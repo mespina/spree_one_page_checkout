@@ -1,17 +1,30 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @order } %>
 
 <div id="checkout" data-hook>
-  <% if Spree::Auth::Config[:registration_step] and !current_spree_user %>
-    <div class="row checkout_content <%= 'disabled-step' unless in_registration_step? %>" data-step="registration" data-hook="checkout_content" id="checkout_registration">
-      <%= render "spree/checkout/registration" %>
-    </div>
-  <% end %>
+  <div class="row">
+    <div class="columns alpha twelve">
+      <% if Spree::Auth::Config[:registration_step] and !current_spree_user %>
+        <div class="checkout_content <%= 'disabled-step' unless in_registration_step? %>" data-step="registration" data-hook="checkout_content" id="checkout_registration">
+          <%= render "spree/checkout/registration" %>
+        </div>
+      <% end %>
 
-  <% @order.checkout_steps[0...-1].each do |state| %>
-    <div class="row checkout_content <%= 'disabled-step' if state != @order.state or in_registration_step? %>" data-step="<%= state %>" data-hook="checkout_content" id="checkout_<%= state %>">
-      <%= render :partial => 'spree/checkout/form_wrapper', :locals => { :order => @order, :state => state } %>
+      <% @order.checkout_steps[0...-1].each do |state| %>
+        <div class="checkout_content <%= 'disabled-step' if state != @order.state or in_registration_step? %>" data-step="<%= state %>" data-hook="checkout_content" id="checkout_<%= state %>">
+          <%= render :partial => 'spree/checkout/form_wrapper', :locals => { :order => @order, :state => state } %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+
+    <div class="columns omega four">
+      <% unless Spree::Auth::Config[:registration_step] and !current_spree_user %>
+        <div id="checkout-summary" data-hook="checkout_summary_box">
+          <%= render :partial => 'spree/checkout/summary', :locals => { :order => @order } %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
 </div>
 
 <script>
