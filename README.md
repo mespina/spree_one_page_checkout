@@ -9,11 +9,11 @@ SpreeOnePageCheckout groups all spree checkout steps in a single view with all t
 The structure of `Spree` views remains in the same manner, with a pair of execciones:
 
 
-* To display all the steps in one page, we overload `spree/checkout/edit.html.erb` our application. For these we are basically walking on each step and each responsible for displaying all the new part is correctly `_form_wrapper`.
+* To display all the steps in one page, we overload `spree/checkout/edit.html.erb` our application. For these we are basically cycling on each step, the responsible for displaying each views correctly is the parcial `_form_wrapper`.
 
-* We have overwritten the part that contains the login form to add a `hidden` parameters that allow us logeandonos disernir if we are in the checkout or not.
+* We have overwritten the part that contains the login form to add a `hidden` parameters that allow us to discernir if we are in the checkout or not.
 
-* View from the Register on the checkout is modified so that it appears as an extra step in the buying process.
+* The register view inside the checkout process is modified so that it appears as an extra step in the buying process
 
 
 Installation
