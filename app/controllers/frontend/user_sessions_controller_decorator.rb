@@ -20,8 +20,12 @@ module Spree
           format.html {
             flash.now[:error] = t('devise.failure.invalid')
 
-            if params[:checkout]
+            if params[:checkout] == 'true'
               @order = current_order
+              # To get addresses in one step checkout
+              @order.bill_address ||= Address.build_default
+              @order.ship_address ||= Address.build_default if @order.checkout_steps.include?('delivery')
+
               render 'spree/checkout/registration'
             else
               render :new
