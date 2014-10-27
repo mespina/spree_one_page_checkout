@@ -9,7 +9,7 @@
   </div>
 
   <% if Spree::Config[:allow_guest_checkout] %>
-    <div id="guest_checkout" data-hook class="columns omega <%= Spree::Config[:allow_guest_checkout] ? 'six' : 'twelve' %>">
+    <div id="guest_checkout" data-hook class="columns omega six">
       <fieldset id="guest_login" data-hook>
         <legend align="center"><%= Spree.t(:guest_user_account) %></legend>
 
