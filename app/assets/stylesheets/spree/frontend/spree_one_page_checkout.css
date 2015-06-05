@@ -24,9 +24,21 @@
 }
 
 
-.affix{
-  top: 18px;
+@media (min-width:1200px) {
+  #checkout-summary .affix {
+    width: 262.5px;
+    top: 18px;
+  }
 }
-.affix-bottom{
-  position: absolute;
+@media (max-width:1199px) and (min-width:993px) {
+  #checkout-summary .affix {
+    width: 212.5px;
+    top: 18px;
+  }
+}
+@media (max-width:992px){
+  #checkout-summary .affix {
+    position: static;
+    /*top: auto;*/
+  }
 }
