@@ -1,30 +1,30 @@
 <%= render :partial => 'spree/shared/error_messages', :locals => { :target => @user } %>
 
 <div id="registration" class="row" data-hook>
-  <div id="account" class="columns alpha six">
-    <fieldset id="login" data-hook>
-      <legend align="center"><%= Spree.t(:login_as_existing) %></legend>
-      <%= render template: 'spree/user_sessions/new' %>
-    </fieldset>
+  <div id="account">
+    <%= render template: 'spree/user_sessions/new' %>
   </div>
 
   <% if Spree::Config[:allow_guest_checkout] %>
-    <div id="guest_checkout" data-hook class="columns omega six">
-      <fieldset id="guest_login" data-hook>
-        <legend align="center"><%= Spree.t(:guest_user_account) %></legend>
+    <div class="col-sm-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title"><%= Spree.t(:guest_user_account) %></h3>
+        </div>
 
-        <% if flash[:registration_error] %>
-          <div class='flash error'><%= flash[:registration_error] %></div>
-        <% end %>
+        <div id="guest_checkout" class="panel-body" data-hook>
+          <% if flash[:registration_error] %>
+            <div class='flash error'><%= flash[:registration_error] %></div>
+          <% end %>
 
-        <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f| %>
-          <p>
-            <%= f.label :email, Spree.t(:email) %><br />
-            <%= f.email_field :email, :class => 'title' %>
-          </p>
-          <p><%= f.submit Spree.t(:save_and_continue), :class => 'button primary' %></p>
-        <% end %>
-      </fieldset>
+          <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f| %>
+            <p>
+              <%= f.email_field :email, :class => 'form-control title', :placeholder => Spree.t(:email) %>
+            </p>
+            <p><%= f.submit Spree.t(:save_and_continue), :class => 'btn btn-lg btn-success btn-block' %></p>
+          <% end %>
+        </div>
+      </div>
     </div>
   <% end %>
 </div>

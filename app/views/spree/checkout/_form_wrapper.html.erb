@@ -1,12 +1,18 @@
 <div data-hook="checkout_form_wrapper">
   <%= form_for order, :url => update_checkout_path(state), :html => { :id => "checkout_form_#{state}" } do |form| %>
-    <% unless Spree::Auth::Config[:registration_step] or order.email? or current_user %>
-      <p class="field" style='clear: both'>
-        <%= form.label :email %><br />
-        <%= form.text_field :email %>
-      </p>
+    <% unless Spree::Auth::Config[:registration_step] and !current_spree_user %>
+      <% if state == 'address' || !order.email? %>
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <div class="form-group">
+              <%= form.label :email %>
+              <%= form.text_field :email, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+      <% end %>
     <% end %>
-
+    <%= form.hidden_field :state_lock_version %>
     <%= render "spree/checkout/#{state}", :form => form %>
   <% end %>
 </div>

@@ -1,8 +1,12 @@
-<%= render :partial => 'spree/shared/error_messages', :locals => { :target => @order } %>
+<% content_for :google_analytics do %>
+  <%= render partial: 'spree/shared/google_checkout.js', locals: { order: @order, step_number: (@order.checkout_steps.index(@order.state) + 1) } %>
+<% end %>
 
 <div id="checkout" data-hook>
+  <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
+
   <div class="row">
-    <div class="columns alpha twelve">
+    <div class="<%= if @order.state != 'confirm' then 'col-md-9' else 'col-md-12' end %>">
       <% if Spree::Auth::Config[:registration_step] and !current_spree_user %>
         <div class="checkout_content <%= 'disabled-step' unless in_registration_step? %>" data-step="registration" data-hook="checkout_content" id="checkout_registration">
           <%= render "spree/checkout/registration" %>
@@ -16,12 +20,11 @@
       <% end %>
     </div>
 
-    <div class="columns omega four">
-      <div id="checkout-summary" data-hook="checkout_summary_box">
-        <%= render :partial => 'spree/checkout/summary', :locals => { :order => @order } %>
+    <% if @order.state != 'confirm' %>
+      <div id="checkout-summary" data-hook="checkout_summary_box" class="col-md-3">
+        <%= render partial: 'summary', locals: { order: @order } %>
       </div>
-    </div>
-
+    <% end %>
   </div>
 </div>
 
