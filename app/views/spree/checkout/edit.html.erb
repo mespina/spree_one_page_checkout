@@ -6,7 +6,7 @@
   <%= render partial: 'spree/shared/error_messages', locals: { target: @order } %>
 
   <div class="row">
-    <div class="<%= if @order.state != 'confirm' then 'col-md-9' else 'col-md-12' end %>">
+    <div class="col-md-9">
       <% if Spree::Auth::Config[:registration_step] and !current_spree_user %>
         <div class="checkout_content <%= 'disabled-step' unless in_registration_step? %>" data-step="registration" data-hook="checkout_content" id="checkout_registration">
           <%= render "spree/checkout/registration" %>
@@ -14,17 +14,26 @@
       <% end %>
 
       <% @order.checkout_steps[0...-1].each do |state| %>
+        <% next if state == 'confirm' %>
         <div class="checkout_content <%= 'disabled-step' if state != @order.state or in_registration_step? %>" data-step="<%= state %>" data-hook="checkout_content" id="checkout_<%= state %>">
           <%= render :partial => 'spree/checkout/form_wrapper', :locals => { :order => @order, :state => state } %>
         </div>
       <% end %>
     </div>
 
-    <% if @order.state != 'confirm' %>
-      <div id="checkout-summary" data-hook="checkout_summary_box" class="col-md-3">
+    <div id="checkout-summary" data-hook="checkout_summary_box" class="col-md-3">
+      <div data-spy="affix" data-offset-top="140" data-offset-bottom="727">
         <%= render partial: 'summary', locals: { order: @order } %>
       </div>
-    <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="checkout_content <%= 'disabled-step' if @order.state!='confirm' or in_registration_step? %>" data-step="confirm" data-hook="checkout_content" id="checkout_confirm">
+          <%= render :partial => 'spree/checkout/form_wrapper', :locals => { :order => @order, :state => 'confirm' } %>
+        </div>
+    </div>
   </div>
 </div>
 

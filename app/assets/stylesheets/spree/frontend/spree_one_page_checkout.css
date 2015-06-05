@@ -22,3 +22,11 @@
 #registration{
   margin-top: 9px;
 }
+
+
+.affix{
+  top: 18px;
+}
+.affix-bottom{
+  position: absolute;
+}
