@@ -15,8 +15,9 @@
             <div class='flash error'><%= flash[:registration_error] %></div>
           <% end %>
           <%= form_for @order, :url => update_checkout_registration_path, :method => :put, :html => { :id => 'checkout_form_registration' } do |f| %>
+            <%= f.label :email, Spree.t(:email) %>
             <p>
-              <%= f.email_field :email, :class => 'form-control title', :placeholder => Spree.t(:email) %>
+              <%= f.email_field :email, :class => 'form-control title' %>
             </p>
             <p><%= f.submit Spree.t(:save_and_continue), :class => 'btn btn-lg btn-success btn-block' %></p>
           <% end %>
