@@ -47,3 +47,9 @@
 <% if I18n.locale != :en %>
   <script src="<%= assets_prefix %>/jquery.validate/localization/messages_<%= I18n.locale %>.js"></script>
 <% end %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $("#checkout_<%= @order.state %>")[0].scrollIntoView();
+  });
+</script>
