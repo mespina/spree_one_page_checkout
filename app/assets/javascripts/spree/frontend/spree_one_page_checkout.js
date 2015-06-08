@@ -13,3 +13,9 @@ Spree.ready(function($) {
     return disable_steps();
   }
 });
+
+Spree.disableSaveOnClick = function() {
+  ($('#checkout_payment form.edit_order, #checkout_confirm form.edit_order')).submit(function() {
+    ($(this)).find(':submit, :image').attr('disabled', true).removeClass('primary').addClass('disabled');
+  });
+};
